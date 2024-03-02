@@ -11,6 +11,7 @@ I've made a simple Windows application for installing Firefox CSS Themes (userCh
 - Creating .foxchrome files using the chrome folder of the selected profile as a sample. 
 - Displaying Developer notes after installing a theme. 
 - Removing installation files (Optional)
+- Resetting Firefox Live Debugging Tool
 
 ## Screenshots
 
