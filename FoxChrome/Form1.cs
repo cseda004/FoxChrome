@@ -694,12 +694,20 @@ namespace FoxChrome
                 
         }
 
+        private void resetLiveDebuggerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("This option is designed to resolve issues regarding Firefox Live Debugging. This includes deleting the chrome_debugger_profile folder in your Firefox profile folder!" + Environment.NewLine + "Are you certain you wish to continue?", "Warning!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+                if (Directory.Exists(getProfileFolder() + @"\chrome_debugger_profile")){
+                    Directory.Delete(getProfileFolder() + @"\chrome_debugger_profile", true);
+                }
+        }
+
         public void clean() {
 
             if (Directory.Exists(getProfileFolder() + @"\chrome\.foxchrome") && Properties.Settings.Default.clean == true) {
 
                 Directory.Delete(getProfileFolder() + @"\chrome\.foxchrome",true);
-                //unzipper c chrome c.foxchrome
             }
 
         }

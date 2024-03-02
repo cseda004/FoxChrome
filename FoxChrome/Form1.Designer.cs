@@ -44,6 +44,7 @@ namespace FoxChrome
             this.browseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displayNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoInstallExtensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +64,8 @@ namespace FoxChrome
             this.abouztToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.resetLiveDebuggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +74,7 @@ namespace FoxChrome
             // 
             this.LUPCBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LUPCBtn.Location = new System.Drawing.Point(22, 78);
-            this.LUPCBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LUPCBtn.Margin = new System.Windows.Forms.Padding(6);
             this.LUPCBtn.Name = "LUPCBtn";
             this.LUPCBtn.Size = new System.Drawing.Size(180, 42);
             this.LUPCBtn.TabIndex = 9;
@@ -92,7 +93,7 @@ namespace FoxChrome
             // browseBtn
             // 
             this.browseBtn.Location = new System.Drawing.Point(213, 78);
-            this.browseBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.browseBtn.Margin = new System.Windows.Forms.Padding(6);
             this.browseBtn.Name = "browseBtn";
             this.browseBtn.Size = new System.Drawing.Size(138, 42);
             this.browseBtn.TabIndex = 8;
@@ -103,7 +104,7 @@ namespace FoxChrome
             // installBtn
             // 
             this.installBtn.Location = new System.Drawing.Point(362, 78);
-            this.installBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.installBtn.Margin = new System.Windows.Forms.Padding(6);
             this.installBtn.Name = "installBtn";
             this.installBtn.Size = new System.Drawing.Size(138, 42);
             this.installBtn.TabIndex = 7;
@@ -126,7 +127,7 @@ namespace FoxChrome
             this.profileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.profileComboBox.FormattingEnabled = true;
             this.profileComboBox.Location = new System.Drawing.Point(22, 27);
-            this.profileComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.profileComboBox.Margin = new System.Windows.Forms.Padding(6);
             this.profileComboBox.Name = "profileComboBox";
             this.profileComboBox.Size = new System.Drawing.Size(473, 32);
             this.profileComboBox.TabIndex = 5;
@@ -141,7 +142,7 @@ namespace FoxChrome
             this.panel1.Controls.Add(this.browseBtn);
             this.panel1.Controls.Add(this.installBtn);
             this.panel1.Location = new System.Drawing.Point(0, 56);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(521, 144);
             this.panel1.TabIndex = 10;
@@ -177,23 +178,30 @@ namespace FoxChrome
             // browseToolStripMenuItem
             // 
             this.browseToolStripMenuItem.Name = "browseToolStripMenuItem";
-            this.browseToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.browseToolStripMenuItem.Size = new System.Drawing.Size(304, 40);
             this.browseToolStripMenuItem.Text = "Browse";
             this.browseToolStripMenuItem.Click += new System.EventHandler(this.browseToolStripMenuItem_Click);
             // 
             // unselectToolStripMenuItem
             // 
             this.unselectToolStripMenuItem.Name = "unselectToolStripMenuItem";
-            this.unselectToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.unselectToolStripMenuItem.Size = new System.Drawing.Size(304, 40);
             this.unselectToolStripMenuItem.Text = "Unselect";
             this.unselectToolStripMenuItem.Click += new System.EventHandler(this.unselectToolStripMenuItem_Click);
             // 
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(304, 40);
             this.openFolderToolStripMenuItem.Text = "Open File Location";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
+            // createToolStripMenuItem
+            // 
+            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(304, 40);
+            this.createToolStripMenuItem.Text = "Create";
+            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // installToolStripMenuItem
             // 
@@ -290,7 +298,8 @@ namespace FoxChrome
             this.openChromeFolderToolStripMenuItem,
             this.openFolderToolStripMenuItem1,
             this.openUserjsToolStripMenuItem,
-            this.openPrefsjsToolStripMenuItem});
+            this.openPrefsjsToolStripMenuItem,
+            this.resetLiveDebuggerToolStripMenuItem});
             this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             this.profileToolStripMenuItem.Size = new System.Drawing.Size(90, 34);
             this.profileToolStripMenuItem.Text = "Profile";
@@ -336,7 +345,7 @@ namespace FoxChrome
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(278, 40);
             this.updateToolStripMenuItem.Text = "Update";
             this.updateToolStripMenuItem.Visible = false;
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
@@ -344,16 +353,16 @@ namespace FoxChrome
             // applicationInfoToolStripMenuItem
             // 
             this.applicationInfoToolStripMenuItem.Name = "applicationInfoToolStripMenuItem";
-            this.applicationInfoToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.applicationInfoToolStripMenuItem.Size = new System.Drawing.Size(278, 40);
             this.applicationInfoToolStripMenuItem.Text = "Application info";
             this.applicationInfoToolStripMenuItem.Click += new System.EventHandler(this.applicationInfoToolStripMenuItem_Click);
             // 
-            // createToolStripMenuItem
+            // resetLiveDebuggerToolStripMenuItem
             // 
-            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
-            this.createToolStripMenuItem.Text = "Create";
-            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
+            this.resetLiveDebuggerToolStripMenuItem.Name = "resetLiveDebuggerToolStripMenuItem";
+            this.resetLiveDebuggerToolStripMenuItem.Size = new System.Drawing.Size(324, 40);
+            this.resetLiveDebuggerToolStripMenuItem.Text = "Reset Live Debugger";
+            this.resetLiveDebuggerToolStripMenuItem.Click += new System.EventHandler(this.resetLiveDebuggerToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -364,7 +373,7 @@ namespace FoxChrome
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -416,6 +425,7 @@ namespace FoxChrome
         private System.Windows.Forms.ToolStripMenuItem removeApplicationFilesAfterInstallToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem resetLiveDebuggerToolStripMenuItem;
     }
 }
 
