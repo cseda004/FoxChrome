@@ -1,0 +1,33 @@
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\bin\Debug\FoxChrome.exe.config
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\bin\Debug\FoxChrome.exe
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\bin\Debug\FoxChrome.pdb
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csprojAssemblyReference.cache
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.Form1.resources
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.Properties.Resources.resources
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csproj.GenerateResource.cache
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.exe
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.pdb
+F:\WindowsStorage\Documents\Visual Studio 2010\Projects\FoxChrome\FoxChrome\obj\Debug\FoxChrome.infoForm.resources
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\bin\Debug\FoxChrome.exe.config
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\bin\Debug\FoxChrome.exe
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\bin\Debug\FoxChrome.pdb
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.csproj.AssemblyReference.cache
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.Form1.resources
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.infoForm.resources
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.Properties.Resources.resources
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.csproj.GenerateResource.cache
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.exe
+C:\Users\danic\Documents\Projects\FoxChrome 2.0\FoxChrome\obj\Debug\FoxChrome.pdb
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\FoxChrome.exe.config
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\FoxChrome.exe
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\FoxChrome.pdb
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.csproj.AssemblyReference.cache
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.Form1.resources
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.infoForm.resources
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.Properties.Resources.resources
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.csproj.GenerateResource.cache
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.exe
+I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.pdb

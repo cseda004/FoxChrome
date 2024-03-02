@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxChrome", "FoxChrome\FoxChrome.csproj", "{848E17AB-1632-4AE3-BD0D-AA65DA7CC3A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unzipper", "Unzipper\Unzipper.csproj", "{CC983774-25E6-4FBE-9247-5C0F2A8163E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{848E17AB-1632-4AE3-BD0D-AA65DA7CC3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848E17AB-1632-4AE3-BD0D-AA65DA7CC3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848E17AB-1632-4AE3-BD0D-AA65DA7CC3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848E17AB-1632-4AE3-BD0D-AA65DA7CC3A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC983774-25E6-4FBE-9247-5C0F2A8163E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC983774-25E6-4FBE-9247-5C0F2A8163E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC983774-25E6-4FBE-9247-5C0F2A8163E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC983774-25E6-4FBE-9247-5C0F2A8163E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23B87A5F-C90B-4ED2-AD5D-AE9EC5232363}
+	EndGlobalSection
+EndGlobal
