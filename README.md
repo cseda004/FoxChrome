@@ -29,6 +29,12 @@ A FoxChrome file is basically just a compressed chrome folder with an additional
 
 ![File Screenshot](https://media.discordapp.net/attachments/702801259014389900/1213545399328182283/image.png?ex=65f5dd39&is=65e36839&hm=3c03b7220ae6405e398c2326f3c4f6a78c81dfeb9694e11f45325bda3ed5765a&=&format=webp&quality=lossless)
 
+## Planned improvements in the future 
+- The code is pretty junky and lacks both comments and documentation. I'm planning on doing something about this. 
+- I might as well add a new Windows 11-like UI which I’ve created the controls for in one of my other projects. 
+- I’ve also thought of revamping the setting applier module which, to my recollection is pretty much a mess. 
+- I'm also considering adding a language pack loader. The module for this feature has already been developed for one of my other projects.
 
+Feel free to share any feature recommendations you might have, they are the most welcome! 😀
 
 
