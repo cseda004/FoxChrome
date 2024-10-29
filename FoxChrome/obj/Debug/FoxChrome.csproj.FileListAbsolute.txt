@@ -31,3 +31,25 @@ I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.exe
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\FoxChrome\obj\Debug\FoxChrome.pdb
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\FoxChrome.exe.config
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\FoxChrome.exe
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\FoxChrome.pdb
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.csproj.AssemblyReference.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.Form1.resources
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.infoForm.resources
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.Properties.Resources.resources
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.csproj.GenerateResource.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.exe
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\FoxChrome\obj\Debug\FoxChrome.pdb
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\Build\FoxChrome.exe.config
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\Build\FoxChrome.exe
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\Build\FoxChrome.pdb
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csproj.AssemblyReference.cache
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.Form1.resources
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.infoForm.resources
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.Properties.Resources.resources
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csproj.GenerateResource.cache
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.csproj.CoreCompileInputs.cache
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.exe
+I:\WindowsStorage\Documents\Projects_GitHub\FoxChrome\FoxChrome\FoxChrome\obj\Debug\FoxChrome.pdb

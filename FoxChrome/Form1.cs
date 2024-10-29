@@ -31,25 +31,18 @@ namespace FoxChrome
         }
 
 
-        public void Form1_Load(object sender, EventArgs e)
-        {
+        public void Form1_Load(object sender, EventArgs e){
+
             loadProfiles(profiles);
-
             readLUPC();
-
             ReadAndApplySettings();
 
-            try
-            {
+            try{
                 if (System.IO.File.Exists(args[0])) selectFile(args[0]);
             }
-            catch (Exception)
-            {
-
-                
+            catch (Exception exc){
+                ExceptionHandling(1, "There are no arguments defined\nForm1_Load --> \n selectFile(args[0])", exc, 0, false) ;
             }
-
-
 
         }
 
@@ -102,10 +95,13 @@ namespace FoxChrome
             
         }
 
-        private void profileComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            
+
+
+        void ExceptionHandling(int code,string excText, Exception eInf, int exitVal, bool UserNotice) {
+            Console.WriteLine("------------------------------\nThe app has run into an error:\nCode:" + code + "\nDetails:\n" + eInf + "\nDeveloper Note:\n" + excText + "\n------------------------------\n");
+            if (UserNotice) MessageBox.Show("------------------------------\nThe app has run into an error:\nCode:" + code + "\nDetails:\n" + eInf + "\nDeveloper Note:\n" + excText + "\n------------------------------\n");
+            if (exitVal == 1) Application.Exit();
+            if (exitVal == 2) Application.Restart();
         }
 
         private void profileComboBox_DropDownClosed(object sender, EventArgs e)
@@ -121,14 +117,13 @@ namespace FoxChrome
 
         private void LUPCBtn_Click(object sender, EventArgs e)
         {
-            LUPCswitch();
+            if (!IsProcessRunning("firefox"))
+                LUPCswitch();
+            else MessageBox.Show(StringTable.MessageBoxes.Error_FirefoxIsRunning_LUPC);
         }
 
-        private void browseBtn_Click(object sender, EventArgs e)
-        {
-
+        private void browseBtn_Click(object sender, EventArgs e){
             Browse();
-
         }
 
         public void Browse() {
@@ -145,19 +140,26 @@ namespace FoxChrome
 
             bool temp = false;
 
-            if (File.ReadAllText(getProfileFolder() + backslash + "prefs.js").Contains(searchedText))
+            try
             {
-                LUPCBtn.Text = "L.U.P.C.: ON";
-                LUPCBtn.ForeColor = Color.Green;
-                temp = true;
+                if (File.ReadAllText(getProfileFolder() + backslash + "prefs.js").Contains(searchedText))
+                {
+                    LUPCBtn.Text = "L.U.P.C.: ON";
+                    LUPCBtn.ForeColor = Color.Green;
+                    temp = true;
+                }
+                else
+                {
+                    LUPCBtn.Text = "L.U.P.C.: OFF";
+                    LUPCBtn.ForeColor = Color.Red;
+                }
             }
-            else {
-                LUPCBtn.Text = "L.U.P.C.: OFF";
-                LUPCBtn.ForeColor = Color.Red;
-            }
+            catch (Exception ex)
+            {
+                ExceptionHandling(2,"Failed to acces prefs.js at the following Function: readLUPC()",ex,1, true);
+            }  
 
             return temp;
-
         }
 
         public bool isInstallAllowed() {
@@ -166,54 +168,35 @@ namespace FoxChrome
 
             if (selectedFile != "")
             {
-                if (DoesFirefoxRun()) { installationAllowed = false; MessageBox.Show("Install can not beggins because Firefox is running. Please close it!"); }
+                if (IsProcessRunning("firefox")) { installationAllowed = false; MessageBox.Show(StringTable.MessageBoxes.Error_FirefoxRunning, "Warning!", MessageBoxButtons.OK); }
                 else
                 {
-
-
-                    if (Directory.Exists(getProfileFolder() + backslash + "chrome"))
-                    {
-
-                        DialogResult dialogResult = MessageBox.Show("CSS customization files found!" + Environment.NewLine + "By continuing the installation the files will be deleted!" + Environment.NewLine + "Do you want to continue?", "Warning!", MessageBoxButtons.YesNo);
+                    if (Directory.Exists(getProfileFolder() + backslash + "chrome")){
+                        DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.CSS_CustomizaionFilesFound, "Caution!", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes) installationAllowed = true;
-
                     }
                     else installationAllowed = true;
 
 
-
-                    if (!File.Exists(Application.StartupPath + @"\Unzipper.exe"))
-                    {
-
-                        MessageBox.Show("Unzipper not found");
+                    if (!File.Exists(Application.StartupPath + @"\Unzipper.exe")){
+                        ExceptionHandling(3,StringTable.ExceptionHandling.UnzipperNotFound ,null,1, true);
                         installationAllowed = false;
-
                     }
-
                 }
-
             }
             else {
-
-                MessageBox.Show("Please browse a theme file to install!");
+                MessageBox.Show(StringTable.MessageBoxes.AwaitingThemeFile);
                 installationAllowed = false;
             }
-
-            
 
             return installationAllowed;
 
         }
-        private void installBtn_Click(object sender, EventArgs e)
-        {
-
+        private void installBtn_Click(object sender, EventArgs e){
             if (isInstallAllowed()) Install();
-
-
         }
 
-        public string removeQuote(string text)
-        {
+        public string removeQuote(string text){
             return text.Replace(a, "");
         }
 
@@ -221,15 +204,16 @@ namespace FoxChrome
             return a + text + a;
         }
 
-        public string optimisePath(string text)
-        {
+        public string optimisePath(string text){
             return addQuote(removeQuote(text));
         }
 
+        /// <summary>
+        /// Calling UnZipper.exe with the proper arguments
+        /// </summary>
         public void Install() {
 
             string ProcessArgs = addQuote("e") + " " + optimisePath(selectedFile) + " " + optimisePath(getProfileFolder() + backslash +"chrome");
-
 
             if (Directory.Exists(getProfileFolder() + backslash + "chrome")) Directory.Delete(getProfileFolder() + backslash + "chrome", true);
 
@@ -238,32 +222,17 @@ namespace FoxChrome
             installBtn.Text = "Installing...";
             installBtn.Enabled = false;
             ProcessTimer.Start();
-
-
         }
 
 
-        public static bool DoesUnzipperRun()
-        {
-
-            Process[] pname = Process.GetProcessesByName("Unzipper");
-            if (pname.Length == 0)
-                return false;
-            else
-                return true;
+        /// <summary>
+        /// Returnes a boolen representing if the given process is running
+        /// </summary>
+        /// <param name="ProcessName">Name of the process you want information about. (It's not necessarily the same as the executable file name!)</param>
+        /// <returns>Boolean representing boolean running state</returns>
+        public static bool IsProcessRunning(string ProcessName) { 
+            return Process.GetProcessesByName(ProcessName).Length != 0;
         }
-
-        public static bool DoesFirefoxRun()
-        {
-
-            Process[] pname = Process.GetProcessesByName("firefox");
-            if (pname.Length == 0)
-                return false;
-            else
-                return true;
-        }
-
-
 
         public void ProcessStartInfo(string process, string args, ProcessWindowStyle windowstyle)
         {
@@ -277,7 +246,7 @@ namespace FoxChrome
 
         private void ProcessTimer_Tick(object sender, EventArgs e)
         {
-            if (!DoesUnzipperRun()) {
+            if (!IsProcessRunning("Unzipper")) {
 
                 stopProcessTimer();
                 
@@ -292,16 +261,13 @@ namespace FoxChrome
                 }
 
                 if (!saveingMode)
-                    MessageBox.Show("Installation finished!");
-                else MessageBox.Show("File has been saved!");
+                    MessageBox.Show(StringTable.MessageBoxes.InstallationFinished);
+                else MessageBox.Show(StringTable.MessageBoxes.FileSaved);
 
                 installBtn.Text = "Install";
                 installBtn.Enabled = true;
                 saveingMode = false;
-
             } 
-                
-
         }
 
         public void stopProcessTimer() 
@@ -309,86 +275,60 @@ namespace FoxChrome
 
         private void abouztToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
-        private void browseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void browseToolStripMenuItem_Click(object sender, EventArgs e){
             Browse();
         }
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (selectedFile == "") MessageBox.Show("Can not open the location of the file because no file is selected!"); else {
-                //MessageBox.Show(selectedFile.Split('\\')[selectedFile.Split('\\').Length - 1]);
-                //MessageBox.Show(selectedFile.Substring(0, selectedFile.Length-1 - selectedFile.Split('\\')[selectedFile.Split('\\').Length - 1].Length));
+            if (selectedFile == "") 
+                MessageBox.Show(StringTable.MessageBoxes.FileLocNotSet); 
+            else 
                 Process.Start(selectedFile.Substring(0, selectedFile.Length-1 - selectedFile.Split('\\')[selectedFile.Split('\\').Length - 1].Length));
-            }
         }
 
         private void openUserjsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(getProfileFolder() + @"\user.js")) Process.Start("openwith.exe", getProfileFolder() + @"\user.js");
             else {
-
-                DialogResult dialogResult = MessageBox.Show("user.js is not exists!" + Environment.NewLine + "Do you want to create it?", "Warning!", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.UserJsMissing_CreationChoice, "Warning!", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes) {
-
                     File.WriteAllText(getProfileFolder() + @"\user.js","");
                     Process.Start("openwith.exe", getProfileFolder() + @"\user.js");
-
                 }
-
-
             }
         }
 
         private void openPrefsjsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(getProfileFolder() + @"\prefs.js")) Process.Start("openwith.exe", getProfileFolder() + @"\prefs.js");
-            else
-            {
-
-                DialogResult dialogResult = MessageBox.Show("prefs.js is not exists!" + Environment.NewLine + "Do you want to create it?", "Warning!", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-
+            else{
+                DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.PrefsJsNotFound, "Warning!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes){
                     File.WriteAllText(getProfileFolder() + @"\prefs.js", "");
                     Process.Start("openwith.exe", getProfileFolder() + @"\prefs.js");
-
                 }
-
-
             }
         }
 
         private void openChromeFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(getProfileFolder() + @"\chrome")) Process.Start(getProfileFolder() + @"\chrome");
-            else
-            {
-
-                DialogResult dialogResult = MessageBox.Show("Chrome folder is not exists!" + Environment.NewLine + "Do you want to create it?", "Warning!", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
+            else{
+                DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.ChromeFolderNotFond, "Warning!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes){
 
                     Directory.CreateDirectory(getProfileFolder() + @"\chrome");
 
-                    DialogResult dialogResult2 = MessageBox.Show("Do you want to create sample files?", "Question", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult2 = MessageBox.Show(StringTable.MessageBoxes.SampleFiles_Choice, "Question", MessageBoxButtons.YesNo);
                     if (dialogResult2 == DialogResult.Yes) {
-
                         File.WriteAllText(getProfileFolder() + @"\chrome\userChrome.css","");
                         File.WriteAllText(getProfileFolder() + @"\chrome\userContent.css", "");
-
                     }
-
-
-
                         Process.Start(getProfileFolder() + @"\chrome");
-
-                }
-
-
+                }                                                                  
             }
         }
 
@@ -401,119 +341,74 @@ namespace FoxChrome
         {
             if (selectedFile == "")
             {
-                MessageBox.Show("Can not unselect the file because no file is selected!");
+                MessageBox.Show(StringTable.MessageBoxes.ThemeFileNotSelected);
             }
-            else { selectedFile = ""; MessageBox.Show("File unselected succesfully!");
+            else { selectedFile = ""; MessageBox.Show(StringTable.MessageBoxes.FileUnselected);
                 browseBtn.Text = "Browse";
                 browseToolStripMenuItem.Text = "Browse";
             }
         }
 
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e){
 
-
-
-            if (isServerAvailable())
-            {
-
+            if (isServerAvailable()){
+                
                 downloadClient("none/update_servers/FoxChrome/latest_client.txt", Application.StartupPath +  @"\latest_client.txt", true);
-
-
                 string latest = File.ReadAllText(Application.StartupPath + @"\latest_client.txt");
 
-                if (Assembly.GetExecutingAssembly().GetName().Version.ToString() != latest)
-                {
-
-
+                if (Assembly.GetExecutingAssembly().GetName().Version.ToString() != latest){
                     ProcessStartInfo(Application.StartupPath + @"\FoxChrome_Updater.exe", "", ProcessWindowStyle.Minimized);
                     Application.Exit();
                 }
-                else
-                {
-
-                    MessageBox.Show("Update not found!");
-
+                else{
+                    MessageBox.Show(StringTable.MessageBoxes.UpdateNotFound);
                 }
-
-
             }
-            else MessageBox.Show("FoxChrome is unable to search for updates because no internet connection detected!");
+            else MessageBox.Show(StringTable.MessageBoxes.UpdateSearchFailed);
 
         }
 
 
-        public  bool isServerAvailable()
-        {
-
+        public  bool isServerAvailable(){
             return downloadClient("none/update_servers/FoxChrome/latest_client.txt", Application.StartupPath + @"\latest_client.txt", true);
         }
 
 
-        public  bool downloadClient(string url, string location, bool overwrite)
-        {
-
+        public  bool downloadClient(string url, string location, bool overwrite){
             if (System.IO.File.Exists(location)) System.IO.File.Delete(location);
-
             try
             {
                 using (var client = new System.Net.WebClient())
-                {
                     client.DownloadFile(url, location);
-                }
             }
             catch (Exception e)
             {
                 return false;
             }
 
-
-
             return true;
-
         }
 
-        private void applicationInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+        private void applicationInfoToolStripMenuItem_Click(object sender, EventArgs e){
             infoForm form2 = new infoForm();
-
-
             form2.Show();
         }
 
         public string getProfileFolder() {
-
-
-            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Mozilla\Firefox\Profiles" + backslash + profileComboBox.Text;
-            
+            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Mozilla\Firefox\Profiles" + backslash + profileComboBox.Text;        
         }
 
         public void LUPCswitch() {
 
-
-
-            if (readLUPC())
-            {
-
+            if (readLUPC()){
                 string temp = File.ReadAllText(getProfileFolder()  + backslash + "prefs.js");
-
                 File.Delete(getProfileFolder()  + backslash + "prefs.js");
-
                 File.WriteAllText(getProfileFolder() + backslash + "prefs.js", temp.Replace(searchedText, ""));
-
-
             }
             else {
-
                 string temp = File.ReadAllText(getProfileFolder() + backslash + "prefs.js");
-
                 File.Delete(getProfileFolder() + backslash + "prefs.js");
-
                 File.WriteAllText(getProfileFolder() + backslash + "prefs.js", temp + Environment.NewLine + searchedText);
-
-
-
             }
 
             readLUPC();
@@ -521,82 +416,65 @@ namespace FoxChrome
         }
 
         public void selectFile(string file) {
-
             selectedFile = file;
             browseBtn.Text = "Change";
             browseToolStripMenuItem.Text = "Change";
-
         }
 
-        public bool IsDirectoryEmpty(string path)
-        {
+        public bool IsDirectoryEmpty(string path){
             IEnumerable<string> items = Directory.EnumerateFileSystemEntries(path);
             using (IEnumerator<string> en = items.GetEnumerator())
-            {
                 return !en.MoveNext();
-            }
         }
 
-        private void autoInstallExtensionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void autoAcceptToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void autoAcceptToolStripMenuItem_Click(object sender, EventArgs e){
             Properties.Settings.Default.extensionInstallMethod = 1;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
-
         }
 
         public void devNote() {
 
-            if (File.Exists( getProfileFolder() + @"\chrome\.foxchrome\note.txt") && Properties.Settings.Default.devNote == true) {
-                MessageBox.Show(System.IO.File.ReadAllText(getProfileFolder() + @"\chrome\.foxchrome\note.txt"),"Developer note");
-            }
+            if (File.Exists( getProfileFolder() + @"\chrome\.foxchrome\note.txt") && Properties.Settings.Default.devNote == true) 
+                MessageBox.Show(System.IO.File.ReadAllText(getProfileFolder() + @"\chrome\.foxchrome\note.txt"),"Developer note"); 
 
         }
 
-        private void removeApplicationFilesAfterInstallToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.clean == true)
-            {
+        private void removeApplicationFilesAfterInstallToolStripMenuItem_Click(object sender, EventArgs e) {
+
+            if (Properties.Settings.Default.clean == true){
                 Properties.Settings.Default.clean = false;
                 removeApplicationFilesAfterInstallToolStripMenuItem.Image = null;
-
             }
-            else { Properties.Settings.Default.clean = true; removeApplicationFilesAfterInstallToolStripMenuItem.Image = tick; }
+            else { 
+                Properties.Settings.Default.clean = true; 
+                removeApplicationFilesAfterInstallToolStripMenuItem.Image = tick; 
+            }
 
             Properties.Settings.Default.Save();
-
             ReadAndApplySettings();
         }
 
-        private void blockAutomaticallyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void blockAutomaticallyToolStripMenuItem_Click(object sender, EventArgs e){
             Properties.Settings.Default.extensionInstallMethod = 2;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
         }
 
-        private void askForInstallToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void askForInstallToolStripMenuItem_Click(object sender, EventArgs e){
             Properties.Settings.Default.extensionInstallMethod = 3;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
-
         }
 
-        private void enableAutomaticallyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void enableAutomaticallyToolStripMenuItem_Click(object sender, EventArgs e){
             Properties.Settings.Default.configFilesInstallMethod = 1;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
         }
 
-        private void blockAutomaticallyToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        private void blockAutomaticallyToolStripMenuItem1_Click(object sender, EventArgs e){
             Properties.Settings.Default.configFilesInstallMethod = 2;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
@@ -605,37 +483,31 @@ namespace FoxChrome
         private void displayNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-
             if (Properties.Settings.Default.devNote == true)
             {
                 Properties.Settings.Default.devNote = false;
                 displayNoteToolStripMenuItem.Image = null;
-
             }
-            else { Properties.Settings.Default.devNote = true; displayNoteToolStripMenuItem.Image = tick; }
+            else { 
+                Properties.Settings.Default.devNote = true; 
+                displayNoteToolStripMenuItem.Image = tick; 
+            }
 
             Properties.Settings.Default.Save();
-
             ReadAndApplySettings();
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-
-        }
 
         public bool addonsInThePackage() {
             
             if (Directory.Exists(getProfileFolder() + @"\chrome\.foxchrome\extensions"))
-                if (!IsDirectoryEmpty(getProfileFolder() + @"\chrome\.foxchrome\extensions")) {  return true; }
+                if (!IsDirectoryEmpty(getProfileFolder() + @"\chrome\.foxchrome\extensions")) 
+                    return true;
 
             return false;
-
         }
-        public void addonInstallPossibility()
-        {
+        public void addonInstallPossibility(){
             string[] fileArray = Directory.GetFiles(getProfileFolder() + @"\chrome\.foxchrome\extensions\", "*.xpi");
             askAddonsForInstall(fileArray);
         }
@@ -647,29 +519,21 @@ namespace FoxChrome
                 if (Properties.Settings.Default.extensionInstallMethod == 1) Process.Start(file);
 
                 if (Properties.Settings.Default.extensionInstallMethod == 3){
-                    DialogResult dialogResult = MessageBox.Show("Do you want to install the following add-on?" + Environment.NewLine + file.Split('\\')[file.Split('\\').Length - 1] + Environment.NewLine, "Add-on install approval message", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.ConfirmAddonInstallation + file.Split('\\')[file.Split('\\').Length - 1], "Add-on installation approval request", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes) { Process.Start(file); };
                 }
 
-
             }
-
         }
 
-        private void askForInstallToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        private void askForInstallToolStripMenuItem1_Click(object sender, EventArgs e){
             Properties.Settings.Default.configFilesInstallMethod = 3;
             Properties.Settings.Default.Save();
             ReadAndApplySettings();
         }
 
-        private void installToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void createToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void createToolStripMenuItem_Click(object sender, EventArgs e){
             saveFileDialog1.Filter = "FoxChrome Files|*.foxchrome|All files|*.*";
             saveFileDialog1.Title = "Save FoxChrome file";
             saveFileDialog1.FileName = "";
@@ -681,52 +545,38 @@ namespace FoxChrome
 
                 string ProcessArgs = addQuote("c") + " " + optimisePath(getProfileFolder() + backslash + "chrome") + " " + optimisePath(saveFileDialog1.FileName);
 
-
                 ProcessStartInfo(Application.StartupPath + @"\Unzipper.exe", ProcessArgs, ProcessWindowStyle.Hidden);
 
                 installBtn.Text = "Saving...";
                 installBtn.Enabled = false;
                 saveingMode = true;
                 ProcessTimer.Start();
-
-
-            }
-                
+            }        
         }
 
-        private void resetLiveDebuggerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("This option is designed to resolve issues regarding Firefox Live Debugging. This includes deleting the chrome_debugger_profile folder in your Firefox profile folder!" + Environment.NewLine + "Are you certain you wish to continue?", "Warning!", MessageBoxButtons.YesNo);
+        private void resetLiveDebuggerToolStripMenuItem_Click(object sender, EventArgs e){
+            DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.LiveDebugginResetConfirmation, "Warning!", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
-                if (Directory.Exists(getProfileFolder() + @"\chrome_debugger_profile")){
-                    Directory.Delete(getProfileFolder() + @"\chrome_debugger_profile", true);
-                }
+                if (Directory.Exists(getProfileFolder() + @"\chrome_debugger_profile"))
+                    Directory.Delete(getProfileFolder() + @"\chrome_debugger_profile", true);        
         }
 
         public void clean() {
-
-            if (Directory.Exists(getProfileFolder() + @"\chrome\.foxchrome") && Properties.Settings.Default.clean == true) {
-
+            if (Directory.Exists(getProfileFolder() + @"\chrome\.foxchrome") && Properties.Settings.Default.clean == true)
                 Directory.Delete(getProfileFolder() + @"\chrome\.foxchrome",true);
-            }
-
         }
 
         public void ConfigFileInstallAttempt() {
 
-            if (File.Exists(getProfileFolder() + @"\chrome\.foxchrome\user.js"))
-            {
+            if (File.Exists(getProfileFolder() + @"\chrome\.foxchrome\user.js")){
 
                 if (Properties.Settings.Default.configFilesInstallMethod == 1) installConfigFile();
 
-                if (Properties.Settings.Default.configFilesInstallMethod == 3)
-                {
-
-                    DialogResult dialogResult = MessageBox.Show("Do you want to install the new user.js config file that is contained in the package? ", "Config file install approval message", MessageBoxButtons.YesNo);
+                if (Properties.Settings.Default.configFilesInstallMethod == 3){
+                    DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.UserJsInstallationWarning, "Config file installation approval message", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes) installConfigFile();
-
                 }
-
+            
             }
 
         }
@@ -736,24 +586,15 @@ namespace FoxChrome
             bool installationAllowed = true;
 
             if (File.Exists(getProfileFolder() + @"\user.js")) {
-
-                DialogResult dialogResult = MessageBox.Show("Your profile folder is already contains an user.js configuration file." + Environment.NewLine + "Do you want to overwrite it?", "Warning!", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(StringTable.MessageBoxes.ConfigFileOverWrite_Choice, "Warning!", MessageBoxButtons.YesNo);
                 if (dialogResult != DialogResult.Yes) installationAllowed = false;
-
             }
 
             if (installationAllowed) {
-
                 File.Copy(getProfileFolder() + @"\chrome\.foxchrome\user.js", getProfileFolder() + @"\user.js",true);
-
-            
             }
-
-
         
         }
-
-
 
     }
 }

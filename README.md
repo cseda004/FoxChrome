@@ -1,8 +1,6 @@
 
 # FoxChrome
 
-Screenshots are currently not available! This is gonna be fixed soon!
-
 I've made a simple Windows application for installing Firefox CSS Themes (userChrome.css, userContent.css, etc.). I've posted it on Reddit and quite a few people seemed to be interested so I decided to upload it to GitHub. 
 
 ## What it is capable of:
@@ -13,7 +11,6 @@ I've made a simple Windows application for installing Firefox CSS Themes (userCh
 - Creating .foxchrome files using the chrome folder of the selected profile as a sample. 
 - Displaying Developer notes after installing a theme. 
 - Removing installation files (Optional)
-- Resetting Firefox Live Debugging Tool
 
 ## Screenshots
 
@@ -37,6 +34,9 @@ A FoxChrome file is basically just a compressed chrome folder with an additional
 - I might as well add a new Windows 11-like UI which I’ve created the controls for in one of my other projects. 
 - I’ve also thought of revamping the setting applier module which, to my recollection is pretty much a mess. 
 - I'm also considering adding a language pack loader. The module for this feature has already been developed for one of my other projects.
+- Extending the features of .foxchrome file while ensuring backwards-compatibility (There are many things that it can import but not export - like extensions)
+- Adding a better extension installer feature (possibly with an option to remove or disable extensions that were blacklisted by a package)
+- Let the user override the installation block when an instance of Firefox is running
 
 Feel free to share any feature recommendations you might have, they are the most welcome! 😀
 

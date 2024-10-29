@@ -12,6 +12,7 @@ namespace FoxChrome
     {
 
         public static string a = "\"";
+        public static int ErrorCode = 0;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,11 +20,12 @@ namespace FoxChrome
         [STAThread]
         static void Main(string[] args)
         {
-            //foreach (var i in getProfiles()) MessageBox.Show(i);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1(args, getProfiles()));
         }
+
+
 
         static string[] getProfiles() {
 
@@ -42,6 +44,11 @@ namespace FoxChrome
 
             return (string[])profiles.ToArray(typeof(string));
 
+        }
+
+
+        static void ExitManager() { 
+            
         }
 
     }

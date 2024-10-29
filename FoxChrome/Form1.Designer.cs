@@ -78,7 +78,7 @@ namespace FoxChrome
             this.LUPCBtn.Name = "LUPCBtn";
             this.LUPCBtn.Size = new System.Drawing.Size(180, 42);
             this.LUPCBtn.TabIndex = 9;
-            this.LUPCBtn.Text = "L.U.P.C.: OFF";
+            this.LUPCBtn.Text = StringTable.UI_Defaults.LUPCBtn_Text;
             this.LUPCBtn.UseVisualStyleBackColor = true;
             this.LUPCBtn.Click += new System.EventHandler(this.LUPCBtn_Click);
             // 
@@ -97,7 +97,7 @@ namespace FoxChrome
             this.browseBtn.Name = "browseBtn";
             this.browseBtn.Size = new System.Drawing.Size(138, 42);
             this.browseBtn.TabIndex = 8;
-            this.browseBtn.Text = "Browse";
+            this.browseBtn.Text = StringTable.UI_Defaults.BrowseBtn_Text;
             this.browseBtn.UseVisualStyleBackColor = true;
             this.browseBtn.Click += new System.EventHandler(this.browseBtn_Click);
             // 
@@ -108,7 +108,7 @@ namespace FoxChrome
             this.installBtn.Name = "installBtn";
             this.installBtn.Size = new System.Drawing.Size(138, 42);
             this.installBtn.TabIndex = 7;
-            this.installBtn.Text = "Install";
+            this.installBtn.Text = StringTable.UI_Defaults.installBtn_Text;
             this.installBtn.UseVisualStyleBackColor = true;
             this.installBtn.Click += new System.EventHandler(this.installBtn_Click);
             // 
@@ -131,7 +131,6 @@ namespace FoxChrome
             this.profileComboBox.Name = "profileComboBox";
             this.profileComboBox.Size = new System.Drawing.Size(473, 32);
             this.profileComboBox.TabIndex = 5;
-            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.profileComboBox_SelectedIndexChanged);
             this.profileComboBox.DropDownClosed += new System.EventHandler(this.profileComboBox_DropDownClosed);
             // 
             // panel1
@@ -213,7 +212,6 @@ namespace FoxChrome
             this.installToolStripMenuItem.Name = "installToolStripMenuItem";
             this.installToolStripMenuItem.Size = new System.Drawing.Size(86, 34);
             this.installToolStripMenuItem.Text = "Install";
-            this.installToolStripMenuItem.Click += new System.EventHandler(this.installToolStripMenuItem_Click);
             // 
             // displayNoteToolStripMenuItem
             // 
@@ -231,7 +229,6 @@ namespace FoxChrome
             this.autoInstallExtensionsToolStripMenuItem.Name = "autoInstallExtensionsToolStripMenuItem";
             this.autoInstallExtensionsToolStripMenuItem.Size = new System.Drawing.Size(465, 40);
             this.autoInstallExtensionsToolStripMenuItem.Text = "Extension install prompt";
-            this.autoInstallExtensionsToolStripMenuItem.Click += new System.EventHandler(this.autoInstallExtensionsToolStripMenuItem_Click);
             // 
             // autoAcceptToolStripMenuItem
             // 
@@ -378,7 +375,6 @@ namespace FoxChrome
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FoxChrome";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

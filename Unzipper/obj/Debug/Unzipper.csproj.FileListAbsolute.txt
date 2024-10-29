@@ -18,3 +18,11 @@ I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\bin\Unzipper.pdb
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\Unzipper.exe.config
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\Unzipper.exe
 I:\WindowsStorage\Documents\Projects\FoxChrome 3.0\Build\Unzipper.pdb
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\Unzipper.exe.config
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\Unzipper.exe
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Build\Unzipper.pdb
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Unzipper\obj\Debug\Unzipper.csproj.AssemblyReference.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Unzipper\obj\Debug\Unzipper.csproj.SuggestedBindingRedirects.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Unzipper\obj\Debug\Unzipper.csproj.CoreCompileInputs.cache
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Unzipper\obj\Debug\Unzipper.exe
+C:\Users\danic\Documents\FoxChrome-3.2.0.0\Unzipper\obj\Debug\Unzipper.pdb
