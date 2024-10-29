@@ -1,6 +1,8 @@
 
 # FoxChrome
 
+Screenshots are currently not available. This is gonna be fixed soon!
+
 I've made a simple Windows application for installing Firefox CSS Themes (userChrome.css, userContent.css, etc.). I've posted it on Reddit and quite a few people seemed to be interested so I decided to upload it to GitHub. 
 
 ## What it is capable of:
